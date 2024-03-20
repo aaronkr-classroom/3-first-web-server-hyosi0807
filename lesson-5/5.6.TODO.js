@@ -7,14 +7,39 @@
  */
 
 // 요청에 따른 라우트의 매핑 정의
-const routeRespMap;
+const routeRespMap = {
+    "/": "<h1>Home page</h1><p>Welcome</p>",
+    "/about": "<h1>About page</h1><p>about</p>",
+    "/info": "<h1>info page</h1><p>info</p>",
+    "/contact": "<h1>contact page</h1><p>Welcome contact</p>",
+};
 
 // listing5.5.js에서 (p. 96)
-const port;
+const port = 3000,
+    http = require('http'),
+    httpStatus = require('http-status-codes'),
+    app = http.createServer();
 
-// 요청 라우트가 정의된 맵에 있는지 체크
 
-// <<< 나머진 서버 코드 입력 하십시오 >>>
+app.on("request", (req, res) => {
+    res.writeHead(httpStatus.OK,{
+        "Content-Type": "text/html",
+    });
+    // 요청 라우트가 정의된 맵에 있는지 체크
+    if(routeRespMap[req.url]) { // "/about"
+        setTimeout(()=> {
+            res.end(routeRespMap[req.url]);
+        }, 2000);
+    } else {
+        setTimeout(()=> {
+            res.end("<h1>404</h1><p>Where are you?</p>");
+        }, 1000);
+    }
+});
+if(process.env.NODE_ENV !=='test') {
+    app.listen(port);
+    console.log(`Server at: http://localhost:${port}`);
+}
 
 // listing5.7.js에서 (p. 98)
 // 수동으로 응답에 지연을 걸기 위한 코드 감싸기

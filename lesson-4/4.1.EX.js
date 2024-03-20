@@ -27,7 +27,9 @@ const app = http.createServer( (req, res) => {
   // (req, res) 새로 만들어진 서버 인스턴스로 앱은 HTTP 요청(req)을 받을 준비를 하고 HTTP 응답(res)을 전송한다.
 
   // 시스템은 클라이언트로부터 요청을 받았음을 기록하고
-console.log("Message received!");
+console.log("Message received!"); // GET / POST
+console.log(req.method); // /about.html
+console.log(req.headers); // Content-Type: text/html
 
   // 콜백 함수의 response 매개변수를 사용해 처음 요청을 받은 사용자에게 다시 내용을보낸다.
   // 첫 번째 줄에서는 writeHead 메소드를 사용해 응답의 HTTP 헤더의 기본 속성을 정의한다.
